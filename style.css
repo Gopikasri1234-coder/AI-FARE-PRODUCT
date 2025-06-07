@@ -1,0 +1,90 @@
+/* Basic reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background: #f3f4f8;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+}
+
+/* Card container */
+.card {
+  width: 100%;
+  max-width: 550px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem 2rem 2.5rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #444;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  transition: border 0.2s;
+}
+textarea:focus {
+  outline: none;
+  border-color: #4b7bec;
+}
+
+/* Button */
+button {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  background: #4b7bec;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button:hover {
+  background: #3969d4;
+}
+
+/* Result message styles */
+p {
+  margin-top: 1.2rem;
+  padding: 0.9rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+}
+.hidden {
+  display: none;
+}
+
+/* color-coded verdicts */
+.real  { background: #e7f9ed; color: #18814c; }
+.warn  { background: #fff5e5; color: #b66a00; }
+.fake  { background: #fdecea; color: #c63621; }
+.info  { background: #f0f8ff; color: #00529b; }

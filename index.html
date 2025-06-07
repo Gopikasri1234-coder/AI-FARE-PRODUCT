@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Fake Product-Review Detector</title>
+
+  <!-- link to external stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="card">
+    <h1>Fake Review Detector</h1>
+
+    <label for="review">Paste or type a product review:</label>
+    <textarea id="review" rows="6" placeholder="e.g. “This product changed my life!!! 100% amazing!!!”"></textarea>
+
+    <button id="checkBtn">Check Review</button>
+
+    <p id="result" class="hidden"></p>
+  </div>
+
+  <!-- ───────────── Mini “AI” logic ───────────── -->
+  <script>
+    const suspiciousPatterns = [
+      /100\s*%/i,
+      /life\s*changing/i,
+      /guaranteed/i,
+      /money\s*back/i,
+      /amazing/i,
+      /unbelievable/i,
+      /must\s*buy/i,
+      /!!!!+/,
+      /\b(?:offer|deal)\b/i
+    ];
+
+    document.getElementById("checkBtn").addEventListener("click", () => {
+      const text = document.getElementById("review").value;
+      const resultBox = document.getElementById("result");
+
+      if (!text.trim()) {
+        resultBox.textContent = "⚠️ Please enter some text first.";
+        resultBox.className = "info";
+        return;
+      }
+
+      // Simple heuristic “scoring”
+      let score = 0;
+      suspiciousPatterns.forEach(rx => {
+        if (rx.test(text)) score++;
+      });
+      if (text.split(" ").length < 8) score++;            // Very short reviews
+      if ((text.match(/!/g) || []).length > 3) score++;   // Too many exclamations
+
+      // Output verdict
+      if (score >= 3) {
+        resultBox.textContent =
+          "🟥 Likely fake or spammy. (" + score + " red flags)";
+        resultBox.className = "fake";
+      } else if (score === 2) {
+        resultBox.textContent =
+          "🟧 Borderline – review looks a bit suspicious.";
+        resultBox.className = "warn";
+      } else {
+        resultBox.textContent = "🟩 Looks authentic.";
+        resultBox.className = "real";
+      }
+    });
+  </script>
+</body>
+</html>
